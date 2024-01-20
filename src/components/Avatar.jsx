@@ -1,10 +1,26 @@
-import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import React, { useEffect, useRef } from "react";
+import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 
 export function Avatar(props) {
-  const { nodes, materials } = useGLTF("/65a8c801c8b883955e9479a9.glb");
+
+  const group = useRef();
+
+  const { nodes, materials } = useGLTF("models/65a8c801c8b883955e9479a9.glb");
+
+  const { animations: typingAnimation } = useFBX("animations/Typing.fbx")
+  
+  typingAnimation[0].name = "Typing";
+  console.log(typingAnimation)
+
+  const { actions } = useAnimations(typingAnimation, group);
+
+  useEffect(() => {
+    actions["Typing"].reset().play();
+  }, []);
+
   return (
-    <group {...props} dispose={null}>
+    
+    <group {...props} ref={group} dispose={null}>
       <primitive object={nodes.Hips} />
       <skinnedMesh
         name="EyeLeft"
@@ -88,4 +104,4 @@ export function Avatar(props) {
   );
 }
 
-useGLTF.preload("/65a8c801c8b883955e9479a9.glb");
+useGLTF.preload("models/65a8c801c8b883955e9479a9.glb");

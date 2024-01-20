@@ -5,12 +5,11 @@ import { Avatar } from "./Avatar";
 export const Experience = () => {
   return (
     <>
-      <Avatar/>
       <OrbitControls />
-      <mesh>
-        <boxGeometry />
-        <meshNormalMaterial />
-      </mesh>
+      <group position-y={-1}>
+      <Avatar/>
+      </group>
+      <ambientLight intensity={1} />
     </>
   );
 };
