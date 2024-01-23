@@ -19,8 +19,8 @@ export function Avatar(props) {
   }, []);
 
   return (
-    
     <group {...props} ref={group} dispose={null}>
+      <group rotation-x={-Math.PI / 2}>
       <primitive object={nodes.Hips} />
       <skinnedMesh
         name="EyeLeft"
@@ -100,6 +100,7 @@ export function Avatar(props) {
         morphTargetDictionary={nodes.Wolf3D_Body.morphTargetDictionary}
         morphTargetInfluences={nodes.Wolf3D_Body.morphTargetInfluences}
       />
+    </group>
     </group>
   );
 }
