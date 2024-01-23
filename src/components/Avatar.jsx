@@ -15,7 +15,7 @@ export function Avatar(props) {
   const { actions } = useAnimations(typingAnimation, group);
 
   useEffect(() => {
-    actions["Typing"].reset().play();
+    actions["Typing1"].reset().play();
   }, []);
 
   return (
