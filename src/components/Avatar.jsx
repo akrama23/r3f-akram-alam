@@ -10,7 +10,7 @@ export function Avatar(props) {
   const { animations: typingAnimation } = useFBX("animations/Typing.fbx")
   
   typingAnimation[0].name = "Typing";
-  console.log(typingAnimation)
+  // console.log(typingAnimation)
 
   const { actions } = useAnimations(typingAnimation, group);
 
