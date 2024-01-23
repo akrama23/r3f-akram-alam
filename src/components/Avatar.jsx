@@ -7,15 +7,15 @@ export function Avatar(props) {
 
   const { nodes, materials } = useGLTF("models/65a8c801c8b883955e9479a9.glb");
 
-  const { animations: typingAnimation } = useFBX("animations/Typing1.fbx")
+  const { animations: typingAnimation } = useFBX("animations/Typing.fbx")
   
-  typingAnimation[0].name = "Typing1";
+  typingAnimation[0].name = "Typing";
  
 
   const { actions } = useAnimations(typingAnimation, group);
 
   useEffect(() => {
-    actions["Typing1"].reset().play();
+    actions["Typing"].reset().play();
   }, []);
 
   return (
