@@ -1,7 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useControls } from "leva";
+import * as THREE from "three";
 
 export function Avatar(props) {
+
+  const { headFollow } = useControls({ 
+    headFollow: false 
+  });
 
   const group = useRef();
 
@@ -13,6 +20,12 @@ export function Avatar(props) {
  
 
   const { actions } = useAnimations(typingAnimation, group);
+
+  useFrame((state) => {
+    if (headFollow){ 
+      group.current.getObjectByName("Head").lookAt(state.camera.position)
+    }
+  });
 
   useEffect(() => {
     actions["Typing"].reset().play();
