@@ -6,6 +6,8 @@ import * as THREE from "three";
 
 export function Avatar(props) {
 
+  const { animation } = props;
+
   const { headFollow, cursorFollow } = useControls({ 
     headFollow: false,
     cursorFollow: false,
@@ -20,6 +22,8 @@ export function Avatar(props) {
   const { animations: fallingAnimation } = useFBX("animations/StandingIdle180fps.fbx")
   
   typingAnimation[0].name = "Typing";
+  standingAnimation[0].name = "Standing";
+  fallingAnimation[0].name = "Falling";
  
 
   const { actions } = useAnimations(typingAnimation, group);
@@ -35,7 +39,7 @@ export function Avatar(props) {
   });
 
   useEffect(() => {
-    actions["Typing"].reset().play();
+    actions[animation].reset().play();
   }, []);
 
   return (
