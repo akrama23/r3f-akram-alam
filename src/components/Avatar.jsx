@@ -18,15 +18,15 @@ export function Avatar(props) {
   const { nodes, materials } = useGLTF("models/65a8c801c8b883955e9479a9.glb");
 
   const { animations: typingAnimation } = useFBX("animations/Typing.fbx")
-  const { animations: standingAnimation } = useFBX("animations/Falling21fps.fbx")
-  const { animations: fallingAnimation } = useFBX("animations/StandingIdle180fps.fbx")
+  const { animations: fallingAnimation } = useFBX("animations/Falling21fps.fbx")
+  const { animations: standingAnimation } = useFBX("animations/StandingIdle180fps.fbx")
   
   typingAnimation[0].name = "Typing";
   standingAnimation[0].name = "Standing";
   fallingAnimation[0].name = "Falling";
  
 
-  const { actions } = useAnimations(typingAnimation, group);
+  const { actions } = useAnimations([typingAnimation[0], standingAnimation[0], fallingAnimation[0]], group);
 
   useFrame((state) => {
     if (headFollow){ 
@@ -40,7 +40,10 @@ export function Avatar(props) {
 
   useEffect(() => {
     actions[animation].reset().play();
-  }, []);
+    return() => {
+    actions[animation].reset().stop();
+    };
+  }, [ animation ]);
 
   return (
     <group {...props} ref={group} dispose={null}>
